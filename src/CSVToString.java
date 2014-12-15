@@ -17,5 +17,5 @@ public class CSVToString {
     static String[] getJVColumns(){
     	return JV_Columns;
     }
-    
+   //all hard coded mappings 
   }
