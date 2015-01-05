@@ -32,16 +32,18 @@ public class XMLDirectParse {
 		DocumentBuilderFactory DBF = DocumentBuilderFactory.newInstance();
 		DocumentBuilder Doc = DBF.newDocumentBuilder();
 
-		String csv = "C://work//CandidateData.csv"; // target CSV file
+		
+		String csv = "C://work//CandidateRecordsA_0.csv"; // target CSV file
 		CSVWriter writer = new CSVWriter(new FileWriter(csv)); // writer object
 																// writer.write(string)
 
-		
-	//	CSVWriter writer = new CSVWriter(new FileWriter(csv), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER);
-		
+		// CSVWriter writer = new CSVWriter(new FileWriter(csv),
+		// CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER);
+
 		String[] JV_Columns = CSVToString.getJVColumns();
 
-		File CandidateFile = new File("C:/Work/CandRecordTest.xml");
+		File CandidateFile = new File(
+				"C:/Users/mukul.kumar/Pictures/uploads/unzipped/FlipkartIndiaPvtLtd_10012014-12312014_12162014233658/Candidates/CandidateRecordsA_0.xml");
 
 		if (CandidateFile.exists()) {
 			Document doc = Doc.parse(CandidateFile);
@@ -61,23 +63,24 @@ public class XMLDirectParse {
 															// candidate
 				tempList.add((NodeList) docEle
 						.getElementsByTagName(JV_Columns[i]));
-				
+
 			}
 
 			// for creating string per candidate to be written into CSV file
-			NodeList list=null;
+			NodeList list = null;
 			for (int i = 0; i < candidateList.getLength(); i++) {
-				//NodeList list = (NodeList) tempList.get(i);
-				tempCandidateRow[i] = new String();
+				// NodeList list = (NodeList) tempList.get(i);
+				for(int k=0;k<tempCandidateRow.length;k++)
+					tempCandidateRow[k] = new String();
 				for (int j = 0; j < JV_Columns.length; j++) {
 					list = (NodeList) tempList.get(j);
-                  if(list.item(i)!=null)
-					tempCandidateRow[j] = getCharacterDataFromElement((Element) list.item(i));
-                  else
-                	  tempCandidateRow[j] ="";  
+					if (list.item(i) != null)
+						tempCandidateRow[j] = getCharacterDataFromElement((Element) list.item(i));
+					else
+						tempCandidateRow[j] = "";
 				}
-				
-              writer.writeNext(tempCandidateRow);
+
+				writer.writeNext(tempCandidateRow);
 			}
 
 			writer.close(); // close the writer
