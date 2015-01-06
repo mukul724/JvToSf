@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class CSVToString {
    	
@@ -5,7 +7,7 @@ public class CSVToString {
     static String JV_Mapping="Email,Email,FirstName,middleName,LastName,Mobile,HomePhone,Address,address2,City,State,PostalCode,Country,dateOfBirth,Gender,ssn,disabilityStatus,Location,contactOtherPosition,comments,OriginalDocument";
 	static String SF_Columns[] = SF_Data.split(",");
     static String JV_Columns[] = JV_Mapping.split(",");
-	
+ 
     static String[] getSFColumns() {
 		return SF_Columns;
 	}
